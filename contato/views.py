@@ -28,15 +28,14 @@ def detalhes(request, contato_id):
 
 def busca(request):
     termo = request.GET.get('termo')
+    
     if termo is None or not termo:
         messages.add_message(request, messages.ERROR, 'Por favor digite sua pesquisa.')
         return redirect('index')
     
     campos = Concat('nome', Value(' '), 'sobrenome')
     
-    lista_contatos = Contato.objects.annotate(
-        nome_completo= campos
-    ).filter(
+    lista_contatos = Contato.objects.annotate(nome_completo= campos).filter(
         Q(nome_completo__icontains= termo) | Q(telefone__icontains= termo)
         )  
     
