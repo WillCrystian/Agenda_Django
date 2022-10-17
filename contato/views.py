@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from.models import Contato
 
 def index(request):
-    lista_contatos = Contato.objects.order_by('-id')
+    lista_contatos = Contato.objects.order_by('-id').filter(mostrar= True)
     
     paginator = Paginator(lista_contatos, 3)
     paginas = request.GET.get('p')
