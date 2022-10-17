@@ -1,36 +1,29 @@
 {% extends 'base.html' %}
 
-{% block conteudo %}
-    <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="mt-5">{{contato.nome}} {{contato.sobrenome}}</h1>
-                {% if contato.foto.url != None%}
-                <p><img src="{{contato.foto.url}}" style="max-width: 250px; height: auto;"></p>
-                {% endif %}
-                <dl>
-                <dt>ID</dt>
-                <dd>{{contato.id}}</dd>
+{% block conteudo %}    
 
-                <dt>Telefone</dt>
-                <dd>{{contato.telefone}}</dd>
+    <h1 class="mt-5">{{contato.nome}} {{contato.sobrenome}}</h1>
+    {% if contato.foto.url != None%}
+    <p><img src="{{contato.foto.url}}" style="max-width: 250px; height: auto;"></p>
+    {% endif %}
+    <dl>
+    <dt>ID</dt>
+    <dd>{{contato.id}}</dd>
 
-                <dt>E-mail</dt>
-                <dd>{{contato.email}}</dd>
+    <dt>Telefone</dt>
+    <dd>{{contato.telefone}}</dd>
 
-                <dt>Data criação</dt>
-                <dd>{{contato.data_criacao|date:'d/m/Y H:i:s'}}</dd>
+    <dt>E-mail</dt>
+    <dd>{{contato.email}}</dd>
 
-                <dt>Categoria</dt>
-                <dd>{{contato.categoria}}</dd>
+    <dt>Data criação</dt>
+    <dd>{{contato.data_criacao|date:'d/m/Y H:i:s'}}</dd>
 
-                <dt>Descrição</dt>
-                <dd>{{contato.descricao}}</dd>
-                </dl>
+    <dt>Categoria</dt>
+    <dd>{{contato.categoria}}</dd>
 
-            </div>
-        </div>
-    </div>
+    <dt>Descrição</dt>
+    <dd>{{contato.descricao}}</dd>
+    </dl>
 
 {% endblock conteudo %}  
