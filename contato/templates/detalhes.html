@@ -2,9 +2,12 @@
 
 {% block conteudo %}    
 
+
+    {% include 'parciais/_messages.html' %}
+
     <h1 class="mt-5">{{contato.nome}} {{contato.sobrenome}}</h1>
     {% if contato.foto.url != None%}
-    <p><img src="{{contato.foto.url}}" style="max-width: 250px; height: auto;"></p>
+        <p><img src="{{contato.foto.url}}" style="max-width: 250px; height: auto;"></p>
     {% endif %}
     <dl>
     <dt>ID</dt>

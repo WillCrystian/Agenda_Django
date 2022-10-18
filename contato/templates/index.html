@@ -5,8 +5,10 @@
 <!-- Page Content -->
 {% block conteudo %}
 
-    {% comment %} Campo Busca {% endcomment %}
-    
+
+{% include 'parciais/_messages.html' %}
+
+{% comment %} Campo Busca {% endcomment %}
     <h4 class="mt-5">Pesquisa</h4>
 
     <form method="get" action="{% url 'busca' %}">
