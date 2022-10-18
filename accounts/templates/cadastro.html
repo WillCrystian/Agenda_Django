@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %}Cadastro | Agenda{% endblock title %}
+
 {% block conteudo %}
 <h1 class="mt-3 mb-3">Cadastro</h1>
+
 <form method="POST" action="{% url 'cadastro' %}">
     {% csrf_token %}
     {% include 'parciais/_messages.html' %}
+    
     <div class="form-group">
       <label>Nome</label>
       <input type="text" class="form-control" name="nome" value="{{request.POST.nome}}">

@@ -14,8 +14,8 @@ def login(request):
         usuario = request.POST.get('usuario')
         senha = request.POST.get('senha')
         
+        # verificando se existe o usuário e a senha para fazer login
         user = auth.authenticate(request, username= usuario, password= senha )
-        print(user)
         if not user:            
             messages.error(request, 'Usuario ou senha invádo')
             return render(request, 'login.html')
@@ -50,37 +50,45 @@ def cadastro(request):
         senha = request.POST.get('senha').strip()
         senha2 = request.POST.get('senha2').strip()
         
+        # Verificando se os campos estão vazios
         if nome == '' or sobrenome == '' or email == '' or \
             usuario == '' or senha == '' or senha2 == '':
             messages.add_message(request, messages.ERROR, 'Algum dos campos não foi preenchido.')
             return render(request, 'cadastro.html')
         
+        # Validado email
         try:
             validate_email(email)
         except Exception:
             messages.add_message(request, messages.ERROR, 'Email inválido.')
             return render(request, 'cadastro.html')        
         
+        # Verificando se as senhas estão iguais
         if senha != senha2:
             messages.add_message(request, messages.ERROR, 'Senha não são iguais.')
             return render(request, 'cadastro.html')
             
+        # verificando tamanho da senha
         if len(senha) < 6 or len(senha) > 10:
             messages.add_message(request, messages.ERROR, 'Sua senha dete ter de 6 a 10 caracteres.')
             return render(request, 'cadastro.html')
             
+        # Verificando o tamanho do usuário
         if len(usuario) < 6 or len(usuario) > 10:
             messages.add_message(request, messages.ERROR, 'Seu usuário dete ter de 6 a 10 caracteres.')
             return render(request, 'cadastro.html')
         
+        # Verificando se usuário exite
         if User.objects.filter(username= usuario).exists():
             messages.add_message(request, messages.ERROR, 'Usuário já existe.')
             return render(request, 'cadastro.html')
         
+        # #verificando se e-mail existe
         if User.objects.filter(email= email).exists():
             messages.add_message(request, messages.ERROR, 'Email já existe.')
             return render(request, 'cadastro.html')  
        
+        # Cadastrando no banco de dados
         user = User.objects.create_user(first_name= nome,
                                    last_name= sobrenome,
                                    username= usuario,
