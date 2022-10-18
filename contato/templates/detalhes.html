@@ -29,5 +29,8 @@
     <dt>Descrição</dt>
     <dd>{{contato.descricao}}</dd>
     </dl>
+    
+    <a href="{% url 'excluir' contato.id %}" class="btn btn-outline-danger my-2 my-sm-0">Excluir</a>
+
 
 {% endblock conteudo %}  

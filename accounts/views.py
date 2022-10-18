@@ -111,8 +111,8 @@ def cadastro(request):
 @login_required(redirect_field_name='login')
 def dashboard(request):
     if request.method == 'POST':
-        #form = ContatoForm()
-        form = ContatoForm(request.POST, request.POST)
+        # obtendo informações dos inputs e medias
+        form = ContatoForm(request.POST, request.FILES)
         
         # verificando se formulário é valido
         if not form.is_valid():
@@ -137,10 +137,8 @@ def dashboard(request):
             form = ContatoForm(request.POST)        
             return render(request, 'dashboard.html', {'form': form})
         
-        
-        
         # Salvando informações no banco de dados
-        #form.save()
+        form.save()
         messages.success(request, f'O {nome} {sobrenome} foi cadastrado com sucesso.')        
         return redirect('dashboard')
     

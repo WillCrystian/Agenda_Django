@@ -55,4 +55,11 @@ def busca(request):
     contatos = paginator.get_page(paginas)
     
     return render(request, 'busca.html', {'contatos': contatos})
+
+@login_required(redirect_field_name='index')
+def excluir(request, contato_id):    
+    Contato.objects.get(id= contato_id).delete()
+   
+    return redirect('index')
+    
     
