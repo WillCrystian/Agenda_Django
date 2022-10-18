@@ -16,20 +16,21 @@
     </head>
 
     <body>
-
-        {% include 'parciais/_nav.html' %}
-
+        {% comment %} Mostrar Nav se tiver alguem logado {% endcomment %}
+        {% if user.username %}
+            {% include 'parciais/_nav.html' %}  
+        {% endif %}      
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">                    
-
+                    
                     {% block conteudo %}{% endblock conteudo %}
+                    
 
                 </div>
             </div>
         </div>
-
-
 
         <!-- Bootstrap core JavaScript -->
         <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>

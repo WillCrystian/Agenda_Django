@@ -8,8 +8,10 @@
 
 {% include 'parciais/_messages.html' %}
 
+<p class="mt-1">Bem vindo {{user.first_name}} {{user.last_name}}</p>
+
 {% comment %} Campo Busca {% endcomment %}
-    <h4 class="mt-5">Pesquisa</h4>
+    <h5 class="mt-1">Pesquisa</h5>
 
     <form method="get" action="{% url 'busca' %}">
         <div class="form-group row">

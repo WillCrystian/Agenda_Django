@@ -7,15 +7,19 @@
     {% include 'parciais/_messages.html' %}
     <div class="form-group">
       <label>Nome</label>
-      <input type="text" class="form-control" name="nome">
+      <input type="text" class="form-control" name="nome" value="{{request.POST.nome}}">
     </div>
     <div class="form-group">
       <label>Sobrenome</label>
-      <input type="text" class="form-control" name="sobrenome">
+      <input type="text" class="form-control" name="sobrenome" value="{{request.POST.sobrenome}}">
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="email" class="form-control" name="email">
+      <input type="email" class="form-control" name="email" value="{{request.POST.email}}">
+    </div>
+    <div class="form-group">
+      <label>Usuário</label>
+      <input type="text" class="form-control" name="usuario" value="{{request.POST.usuario}}">
     </div>
     <div class="form-group">
       <label>Senha</label>
@@ -26,5 +30,6 @@
       <input type="password" class="form-control" name="senha2">
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar-me</button>
+    <a href="{% url 'login' %}" class="btn btn-primary">Logar</a>
 </form>
 {% endblock conteudo %}

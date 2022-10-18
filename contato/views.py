@@ -5,7 +5,10 @@ from.models import Contato
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(redirect_field_name='login')
 def index(request):
     lista_contatos = Contato.objects.order_by('-id').filter(mostrar= True)
     
@@ -15,6 +18,7 @@ def index(request):
     
     return render(request, 'index.html', {'contatos': contatos})
 
+@login_required(redirect_field_name='login')
 def detalhes(request, contato_id):
     # Se contato não existe 
     contato = get_object_or_404(Contato, id= contato_id)
@@ -26,6 +30,7 @@ def detalhes(request, contato_id):
     
     return render(request, 'detalhes.html', {'contato': contato})
 
+@login_required(redirect_field_name='login')
 def busca(request):
     termo = request.GET.get('termo')
     
