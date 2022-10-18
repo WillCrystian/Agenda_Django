@@ -4,6 +4,8 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from contato.models import Contato
+from .models import ContatoForm
 
 def login(request):
     if request.method == 'POST':
@@ -56,7 +58,7 @@ def cadastro(request):
             messages.add_message(request, messages.ERROR, 'Algum dos campos não foi preenchido.')
             return render(request, 'cadastro.html')
         
-        # Validado email
+        # Validando email
         try:
             validate_email(email)
         except Exception:
@@ -108,4 +110,40 @@ def cadastro(request):
 
 @login_required(redirect_field_name='login')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    if request.method == 'POST':
+        #form = ContatoForm()
+        form = ContatoForm(request.POST, request.POST)
+        
+        # verificando se formulário é valido
+        if not form.is_valid():
+            messages.error(request, 'Erro ao validar formulário')
+            form = ContatoForm(request.POST)        
+            return render(request, 'dashboard.html', {'form': form})
+        
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
+        email = request.POST.get('email')
+        
+        # verificando se e-mail já está cadastrado
+        if Contato.objects.filter(email= email).exists():
+            messages.error(request, 'Email já cadastrado')
+            form = ContatoForm(request.POST)        
+            return render(request, 'dashboard.html', {'form': form})
+            
+        
+        # verificando campos do form
+        if len(nome) < 2:
+            messages.error(request, 'Nome muito pequeno')
+            form = ContatoForm(request.POST)        
+            return render(request, 'dashboard.html', {'form': form})
+        
+        
+        
+        # Salvando informações no banco de dados
+        #form.save()
+        messages.success(request, f'O {nome} {sobrenome} foi cadastrado com sucesso.')        
+        return redirect('dashboard')
+    
+    elif request.method == 'GET':
+        form = ContatoForm()        
+        return render(request, 'dashboard.html', {'form': form})

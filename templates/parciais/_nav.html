@@ -5,7 +5,10 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="{% url 'logout' %}" class="btn btn-outline-success my-2 my-sm-0">Sair</a>
+    </button>
+    <div>
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-success my-2 my-sm-0">Adicionar na agenda</a>
+    <a href="{% url 'logout' %}" class="btn btn-outline-success my-2 my-sm-0">Sair</a>
     </div>
+</div>
 </nav>
